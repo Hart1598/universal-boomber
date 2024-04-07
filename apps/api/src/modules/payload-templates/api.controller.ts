@@ -1,6 +1,6 @@
 import { Body, Param } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
-import { CreatePayloadTemplate, ListPayloadTemplateDto, PayloadTemplatePresenter } from "@app/validation";
+import { CreatePayloadTemplateDto, ListPayloadTemplateDto, PayloadTemplatePresenter } from "@app/validation";
 
 const MODULE_NAME = "payload-templates";
 
@@ -14,7 +14,7 @@ export class PayloadTemplateApiController {
   }
 
   @Route(MODULE_NAME, 'create')
-  create(@Body() body: CreatePayloadTemplate): PayloadTemplatePresenter {
+  create(@Body() body: CreatePayloadTemplateDto): PayloadTemplatePresenter {
     return null
   }
 
