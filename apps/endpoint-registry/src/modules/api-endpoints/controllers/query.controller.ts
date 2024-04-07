@@ -3,11 +3,9 @@ import { Controller } from "@nestjs/common";
 import { RMQRoute } from "nestjs-rmq";
 
 @Controller()
-export class ApiEndpointsCommandController {
+export class ApiEndpointsQueryController {
   @RMQRoute(ApiEndpointsListQuery.topic)
   async list(payload: ApiEndpointsListQuery.Request): Promise<ApiEndpointsListQuery.Response> {
-    console.log('ApiEndpointsCommandController.list', payload);
-
     return [];
   }
 }
