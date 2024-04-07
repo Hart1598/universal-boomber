@@ -6,7 +6,7 @@ import { SERVICE_NAME } from '../constants';
 
 @Module({})
 export class AppConfigModule {
-  static forRoot() {
+  static async forRoot() {
     return {
       module: AppConfigModule,
       imports: [ConfigModule.forRoot(getConfigModuleSettings()), LoggerModule.forRootAsync(SERVICE_NAME)],
