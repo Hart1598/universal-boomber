@@ -5,5 +5,5 @@ export namespace ApiEndpointsCreateCommand {
 
   export type Request = CreateEndpointDto
 
-  export type Response = ApiEndpointPresenter[];
+  export type Response = ApiEndpointPresenter;
 }
