@@ -3,7 +3,7 @@ import { createZodDto } from 'nestjs-zod'
 import { headerId } from './model'
 
 export const deleteHeader = z.object({
-  headerId
+  id: headerId
 })
 
 export type DeleteHeader = z.infer<typeof deleteHeader>
