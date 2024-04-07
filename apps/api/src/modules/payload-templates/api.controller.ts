@@ -1,10 +1,12 @@
 import { Body, Param } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
 import { CreatePayloadTemplateDto, ListPayloadTemplateDto, PayloadTemplatePresenter } from "@app/validation";
+import { ApiTags } from "@nestjs/swagger";
 
 const MODULE_NAME = "payload-templates";
 
 @ModuleRoute(MODULE_NAME)
+@ApiTags(MODULE_NAME)
 export class PayloadTemplateApiController {
   constructor() { }
 

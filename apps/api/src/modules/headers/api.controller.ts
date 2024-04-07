@@ -1,10 +1,12 @@
 import { Body, Param } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
 import { CreateHeaderDto, HeaderPresenter, ListHeadersDto } from "@app/validation";
+import { ApiTags } from "@nestjs/swagger";
 
 const MODULE_NAME = "headers";
 
 @ModuleRoute(MODULE_NAME)
+@ApiTags(MODULE_NAME)
 export class HeadersApiController {
   constructor() { }
 
