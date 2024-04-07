@@ -1,4 +1,6 @@
+import { Body, Param } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
+import { ApiEndpointPresenter, CreateEndpointDto, ListEndpointsDto } from "@app/validation";
 
 const MODULE_NAME = "api-endpoints";
 
@@ -7,17 +9,17 @@ export class ApiEndpointsApiController {
   constructor() { }
 
   @Route(MODULE_NAME, 'list')
-  list() {
+  list(@Body() body: ListEndpointsDto): ApiEndpointPresenter[] {
     return null
   }
 
   @Route(MODULE_NAME, 'create')
-  create() {
+  create(@Body() body: CreateEndpointDto): ApiEndpointPresenter {
     return null
   }
 
   @Route(MODULE_NAME, 'delete')
-  delete() {
+  delete(@Param('id') id: number): void {
     return null
   }
 }
