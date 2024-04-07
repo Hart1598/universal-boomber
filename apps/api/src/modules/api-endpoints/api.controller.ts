@@ -13,8 +13,8 @@ export class ApiEndpointsApiController {
   constructor(private readonly rmqService: RMQService) { }
 
   @Route(MODULE_NAME, 'list')
-  list(@Query() body: ListEndpointsDto): Promise<ApiEndpointPresenter[]> {
-    return this.rmqService.send<ApiEndpointsListQuery.Request, ApiEndpointsListQuery.Response>(ApiEndpointsListQuery.topic, body)
+  list(@Query() query: ListEndpointsDto): Promise<ApiEndpointPresenter[]> {
+    return this.rmqService.send<ApiEndpointsListQuery.Request, ApiEndpointsListQuery.Response>(ApiEndpointsListQuery.topic, query)
   }
 
   @Route(MODULE_NAME, 'create')

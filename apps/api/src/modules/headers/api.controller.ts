@@ -1,4 +1,4 @@
-import { Body, Param } from "@nestjs/common";
+import { Body, Param, Query } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
 import { CreateHeaderDto, HeaderPresenter, ListHeadersDto } from "@app/validation";
 import { ApiTags } from "@nestjs/swagger";
@@ -13,8 +13,8 @@ export class HeadersApiController {
   constructor(private readonly rmqService: RMQService) { }
 
   @Route(MODULE_NAME, 'list')
-  list(@Body() body: ListHeadersDto): Promise<HeaderPresenter[]> {
-    return this.rmqService.send<HeaderQueryCommand.Request, HeaderQueryCommand.Response>(HeaderQueryCommand.topic, body)
+  list(@Query() query: ListHeadersDto): Promise<HeaderPresenter[]> {
+    return this.rmqService.send<HeaderQueryCommand.Request, HeaderQueryCommand.Response>(HeaderQueryCommand.topic, query)
   }
 
   @Route(MODULE_NAME, 'create')

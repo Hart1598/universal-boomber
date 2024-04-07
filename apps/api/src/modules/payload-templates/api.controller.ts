@@ -1,4 +1,4 @@
-import { Body, Param } from "@nestjs/common";
+import { Body, Param, Query } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
 import { CreatePayloadTemplateDto, ListPayloadTemplateDto, PayloadTemplatePresenter } from "@app/validation";
 import { ApiTags } from "@nestjs/swagger";
@@ -13,8 +13,8 @@ export class PayloadTemplateApiController {
   constructor(private readonly rmqService: RMQService) { }
 
   @Route(MODULE_NAME, 'list')
-  list(@Body() body: ListPayloadTemplateDto): Promise<PayloadTemplatePresenter[]> {
-    return this.rmqService.send<PayloadTemplateQueryCommand.Request, PayloadTemplateQueryCommand.Response>(PayloadTemplateQueryCommand.topic, body)
+  list(@Query() query: ListPayloadTemplateDto): Promise<PayloadTemplatePresenter[]> {
+    return this.rmqService.send<PayloadTemplateQueryCommand.Request, PayloadTemplateQueryCommand.Response>(PayloadTemplateQueryCommand.topic, query)
   }
 
   @Route(MODULE_NAME, 'create')

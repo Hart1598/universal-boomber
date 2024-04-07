@@ -5,6 +5,8 @@ import { LoggerModule } from '@app/logger';
 import { SERVICE_NAME } from '../constants';
 import { RMQModule } from 'nestjs-rmq';
 import { getRmqConfigSettings } from './get-rmq-config.settings';
+import { APP_PIPE } from '@nestjs/core';
+import { ZodValidationPipe } from 'nestjs-zod';
 
 @Module({})
 export class AppConfigModule {
@@ -17,7 +19,12 @@ export class AppConfigModule {
         RMQModule.forRootAsync(getRmqConfigSettings('endpoint-registry'))
       ],
       controllers: [],
-      providers: [],
+      providers: [
+        {
+          provide: APP_PIPE,
+          useClass: ZodValidationPipe,
+        },
+      ],
     };
   }
 }
