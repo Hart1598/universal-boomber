@@ -1,4 +1,4 @@
-import { Body, Param } from "@nestjs/common";
+import { Body, Param, Query } from "@nestjs/common";
 import { ModuleRoute, Route } from "../../decorators";
 import { ApiEndpointPresenter, CreateEndpointDto, ListEndpointsDto } from "@app/validation";
 import { ApiTags } from "@nestjs/swagger";
@@ -13,7 +13,7 @@ export class ApiEndpointsApiController {
   constructor(private readonly rmqService: RMQService) { }
 
   @Route(MODULE_NAME, 'list')
-  list(@Body() body: ListEndpointsDto): Promise<ApiEndpointPresenter[]> {
+  list(@Query() body: ListEndpointsDto): Promise<ApiEndpointPresenter[]> {
     return this.rmqService.send<ApiEndpointsListQuery.Request, ApiEndpointsListQuery.Response>(ApiEndpointsListQuery.topic, body)
   }
 

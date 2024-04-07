@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppConfigModule } from '../configs';
+import { ApiEndpointsCommandController } from '../modules';
 
 @Module({})
 export class AppModule {
@@ -7,7 +8,7 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [AppConfigModule.forRoot()],
-      controllers: [],
+      controllers: [ApiEndpointsCommandController],
       providers: [],
     };
   }
