@@ -4,6 +4,7 @@ import { AppModule } from './app/app.module';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from '@app/logger';
 import { NestApplicationOptions } from '@nestjs/common';
+import { setUpSwagger } from './docs';
 
 const appOptions: NestApplicationOptions = {
   bufferLogs: true,
@@ -23,6 +24,8 @@ async function bootstrap() {
   app.useLogger(logger);
 
   const port = configService.getOrThrow('PORT')
+
+  setUpSwagger(app);
 
   await app.listen(port);
 
