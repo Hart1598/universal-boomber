@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppConfigModule } from '../configs';
-import { LoggerModule } from '@app/logger';
-import { SERVICE_NAME } from '../constants';
+import { ApiEndpointsApiController, HeadersApiController, PayloadTemplateApiController } from '../modules';
 
-@Module({
-  imports: [AppConfigModule, LoggerModule.forRootAsync(SERVICE_NAME)],
-  controllers: [],
-  providers: [],
-})
-export class AppModule { }
+@Module({})
+export class AppModule {
+  static forRoot() {
+    return {
+      module: AppModule,
+      imports: [AppConfigModule.forRoot()],
+      controllers: [ApiEndpointsApiController, HeadersApiController, PayloadTemplateApiController],
+      providers: [],
+    };
+  }
+}
