@@ -1,7 +1,9 @@
 import { ApiEndpointsDeleteCommand, ApiEndpointsCreateCommand } from "@app/contracts";
 import { Controller } from "@nestjs/common";
-import { RMQRoute } from "nestjs-rmq";
+import { RMQError, RMQRoute } from "nestjs-rmq";
 import { ApiEndpointsService } from "../services/api-endpoints.service";
+import { ERROR_TYPE } from "nestjs-rmq/dist/constants";
+import { ERROR_CODE } from "@app/utils";
 
 @Controller()
 export class ApiEndpointsCommandController {
@@ -9,7 +11,13 @@ export class ApiEndpointsCommandController {
 
   @RMQRoute(ApiEndpointsDeleteCommand.topic)
   async delete(payload: ApiEndpointsDeleteCommand.Request): Promise<ApiEndpointsDeleteCommand.Response> {
-    return;
+    const item = await this.apiEndpointsService.findById(payload.id);
+
+    if (!item) throw new RMQError('Item not found', ERROR_TYPE.RMQ, ERROR_CODE.NOT_FOUND, payload, 'api-endpoints', 'api-endpoints');
+
+    await this.apiEndpointsService.delete(payload.id);
+
+    return null;
   }
 
   @RMQRoute(ApiEndpointsCreateCommand.topic)

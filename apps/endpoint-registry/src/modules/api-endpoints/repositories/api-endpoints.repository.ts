@@ -39,7 +39,7 @@ export class ApiEndpointsRepository {
       where,
     });
 
-    return result;
+    return result || null;
   }
 
   async find(params: FindParams): Promise<ApiEndpoint[]> {

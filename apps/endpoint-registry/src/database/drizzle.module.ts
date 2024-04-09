@@ -11,10 +11,18 @@ import { ConfigService } from '@nestjs/config';
       provide: PG_CONNECTION,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        const connectionString = configService.get<string>('DATABASE_URL');
+        const user = configService.get<string>('POSTGRES_USER');
+        const password = configService.get<string>('POSTGRES_PASSWORD');
+        const host = configService.get<string>('POSTGRES_HOST');
+        const port = configService.get<string>('POSTGRES_PORT');
+        const database = configService.get<string>('POSTGRES_DB');
+        const ssl = configService.get<boolean>('POSTGRES_SSL', false);
+
+        const connectionString = `postgresql://${user}:${password}@${host}:${port}/${database}`;
+
         const pool = new Pool({
           connectionString,
-          ssl: true,
+          ssl,
         });
 
         return drizzle(pool, { schema });
