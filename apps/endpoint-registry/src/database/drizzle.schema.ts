@@ -1,4 +1,4 @@
-import { ApiEndpointType, HTTP_METHOD } from '@app/types';
+import { ApiEndpointType, HTTP_METHOD, PayloadTemplateTarget } from '@app/types';
 import { pgTable, serial, varchar, text, integer, timestamp } from 'drizzle-orm/pg-core';
 
 export const apiEndpoints = pgTable('api_endpoints', {
@@ -24,6 +24,6 @@ export const payloadTemplates = pgTable('payload_templates', {
     .notNull()
     .references(() => apiEndpoints.id),
   template: text('template').notNull(),
-  target: varchar('target').notNull(),
+  target: varchar('target').$type<PayloadTemplateTarget>().notNull(),
   valueTarget: varchar('valueTarget').notNull(),
 });
