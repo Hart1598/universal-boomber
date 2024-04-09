@@ -23,7 +23,7 @@
     "db:generate": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "drizzle-kit generate:pg --schema src/database/drizzle.schema.ts --out ./assets/migrations",
+        "command": "drizzle-kit generate:pg --schema src/database/drizzle.schema.ts --out ./src/assets/migrations",
         "cwd": "apps/endpoint-registry"
       }
     }

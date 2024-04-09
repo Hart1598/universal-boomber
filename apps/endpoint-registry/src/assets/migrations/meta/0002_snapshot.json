@@ -1,0 +1,167 @@
+{
+  "id": "f05659c1-b5e4-4058-95a8-e09ad2ab5480",
+  "prevId": "e14af502-6255-46b5-bf54-678588cf5e3c",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "api_endpoints": {
+      "name": "api_endpoints",
+      "schema": "",
+      "columns": {
+        "endpointId": {
+          "name": "endpointId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "method": {
+          "name": "method",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'sms'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "api_endpoints_url_unique": {
+          "name": "api_endpoints_url_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "url"
+          ]
+        }
+      }
+    },
+    "headers": {
+      "name": "headers",
+      "schema": "",
+      "columns": {
+        "headerId": {
+          "name": "headerId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "endpointId": {
+          "name": "endpointId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "key": {
+          "name": "key",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "headers_endpointId_api_endpoints_endpointId_fk": {
+          "name": "headers_endpointId_api_endpoints_endpointId_fk",
+          "tableFrom": "headers",
+          "tableTo": "api_endpoints",
+          "columnsFrom": [
+            "endpointId"
+          ],
+          "columnsTo": [
+            "endpointId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "payload_templates": {
+      "name": "payload_templates",
+      "schema": "",
+      "columns": {
+        "templateId": {
+          "name": "templateId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "endpointId": {
+          "name": "endpointId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "template": {
+          "name": "template",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "target": {
+          "name": "target",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "valueTarget": {
+          "name": "valueTarget",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "payload_templates_endpointId_api_endpoints_endpointId_fk": {
+          "name": "payload_templates_endpointId_api_endpoints_endpointId_fk",
+          "tableFrom": "payload_templates",
+          "tableTo": "api_endpoints",
+          "columnsFrom": [
+            "endpointId"
+          ],
+          "columnsTo": [
+            "endpointId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

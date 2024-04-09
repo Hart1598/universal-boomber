@@ -4,14 +4,7 @@ import * as schema from '../../../database/drizzle.schema';
 import { PG_CONNECTION } from "../../../constants";
 import { QueryResult } from "pg";
 import { eq } from "drizzle-orm";
-import { Pagination } from '@app/types'
-
-type InsertApiEndpoint = typeof schema.apiEndpoints.$inferInsert;
-type ApiEndpoint = typeof schema.apiEndpoints.$inferSelect;
-
-export interface FindParams {
-  pagination?: Pagination;
-}
+import { InsertApiEndpoint, ApiEndpoint, FindParams, InsertResult } from "./api-endpoints.repository.interfaces";
 
 @Injectable()
 export class ApiEndpointsRepository {
@@ -23,8 +16,10 @@ export class ApiEndpointsRepository {
 
   private db = this.conn;
 
-  async insert(input: InsertApiEndpoint): Promise<QueryResult<never>> {
-    const result = await this.db.insert(this.apiEndpoints).values(input).execute();
+  async insertOne(input: InsertApiEndpoint): Promise<InsertResult | null> {
+    const results = await this.db.insert(this.apiEndpoints).values(input).returning({ id: this.apiEndpoints.id })
+
+    const [result] = results || [];
 
     return result;
   }
