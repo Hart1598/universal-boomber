@@ -1,4 +1,4 @@
-import { ApiEndpointsListQuery } from "@app/contracts";
+import { ApiEndpointsListQuery, FindByIdQuery } from "@app/contracts";
 import { Controller } from "@nestjs/common";
 import { RMQRoute } from "nestjs-rmq";
 import { ApiEndpointsService } from "../services/api-endpoints.service";
@@ -14,5 +14,14 @@ export class ApiEndpointsQueryController {
     const items = await this.apiEndpointsService.find({ pagination: { limit: take, offset: skip } });
 
     return items;
+  }
+
+  @RMQRoute(FindByIdQuery.topic)
+  async findById(payload: FindByIdQuery.Request): Promise<FindByIdQuery.Response> {
+    const { id } = payload;
+
+    const item = await this.apiEndpointsService.findById(id);
+
+    return item;
   }
 }
