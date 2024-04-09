@@ -9,3 +9,9 @@ export enum HTTP_METHOD {
   CONNECT = 'connect',
   TRACE = 'trace',
 }
+
+
+export type Pagination = {
+  limit: number;
+  offset: number;
+}

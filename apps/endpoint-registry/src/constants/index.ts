@@ -1,3 +1,5 @@
 const SERVICE_NAME = 'endpoint-registry';
 
-export { SERVICE_NAME };
+const PG_CONNECTION = `${SERVICE_NAME}.PG_CONNECTION`;
+
+export { SERVICE_NAME, PG_CONNECTION };

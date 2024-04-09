@@ -4,6 +4,7 @@ import { AppModule } from './app/app.module';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from '@app/logger';
 import { NestApplicationOptions } from '@nestjs/common';
+import { migrateRunner } from './database/migrate';
 
 const appOptions: NestApplicationOptions = {
   bufferLogs: true,
@@ -27,6 +28,8 @@ async function bootstrap() {
   await app.listen(port);
 
   const appURL = await app.getUrl();
+
+  await migrateRunner(app)
 
   logger.log(`ENDPOINT REGISTRY is running on: ${appURL}`, 'BOOT');
 }
