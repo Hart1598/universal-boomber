@@ -1,4 +1,4 @@
 export enum PayloadTemplateTarget {
   BODY = 'body',
-  query = 'query',
+  QUERY = 'query',
 }
