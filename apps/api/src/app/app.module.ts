@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppConfigModule } from '../configs';
-import { ApiEndpointsApiController, HeadersApiController, PayloadTemplateApiController } from '../modules';
+import { ApiEndpointsApiController, DispatcherApiController, HeadersApiController, PayloadTemplateApiController } from '../modules';
 
 @Module({})
 export class AppModule {
@@ -8,7 +8,7 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [AppConfigModule.forRoot()],
-      controllers: [ApiEndpointsApiController, HeadersApiController, PayloadTemplateApiController],
+      controllers: [ApiEndpointsApiController, HeadersApiController, PayloadTemplateApiController, DispatcherApiController],
       providers: [],
     };
   }

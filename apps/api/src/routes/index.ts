@@ -51,5 +51,14 @@ export const routes = {
         method: HTTP_METHOD.DELETE,
       }
     }
+  },
+  dispatcher: {
+    basePath: 'dispatcher',
+    routes: {
+      run: {
+        path: '/run',
+        method: HTTP_METHOD.POST,
+      }
+    }
   }
 }
