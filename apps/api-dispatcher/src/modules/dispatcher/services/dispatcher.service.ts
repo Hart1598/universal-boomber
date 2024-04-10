@@ -11,10 +11,10 @@ export class DispatcherService {
     private readonly httpService: HttpService,
   ) { }
 
-  private convertHeaders = (headerPresenters: HeaderPresenter[]) => {
+  private convertHeaders = (headerPresenters?: HeaderPresenter[]) => {
     const headers: Record<string, string> = {};
 
-    headerPresenters.forEach((header) => {
+    headerPresenters?.forEach((header) => {
       headers[header?.key] = header?.value;
     })
 
@@ -22,6 +22,8 @@ export class DispatcherService {
   }
 
   private createPayload = (payloadTemplatePresenter: PayloadTemplatePresenter, target: string) => {
+    if (!payloadTemplatePresenter) throw Error('Payload template is not found');
+
     const { template, valueTarget } = payloadTemplatePresenter || {};
 
     const parsedTemplate = JSON.parse(template);

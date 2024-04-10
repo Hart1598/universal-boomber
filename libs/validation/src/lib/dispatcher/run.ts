@@ -3,6 +3,7 @@ import { createZodDto } from 'nestjs-zod'
 
 export const dispatcherRun = z.object({
   rounds: z.number().positive(),
+  target: z.string().trim(),
 })
 
 export type DispatcherRun = z.infer<typeof dispatcherRun>

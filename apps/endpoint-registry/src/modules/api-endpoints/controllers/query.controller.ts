@@ -9,9 +9,9 @@ export class ApiEndpointsQueryController {
 
   @RMQRoute(ApiEndpointsListQuery.topic)
   async list(payload: ApiEndpointsListQuery.Request): Promise<ApiEndpointsListQuery.Response> {
-    const { take, skip } = payload;
+    const { offset, limit } = payload;
 
-    const items = await this.apiEndpointsService.find({ pagination: { limit: take, offset: skip } });
+    const items = await this.apiEndpointsService.find({ pagination: { limit, offset } });
 
     return items;
   }

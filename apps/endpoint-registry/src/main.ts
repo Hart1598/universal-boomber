@@ -13,10 +13,6 @@ const appOptions: NestApplicationOptions = {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule.forRoot(), appOptions);
 
-  const globalPrefix = 'api';
-
-  app.setGlobalPrefix(globalPrefix);
-
   const configService = app.get(ConfigService);
 
   const logger = app.get(Logger);

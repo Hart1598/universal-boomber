@@ -2,7 +2,7 @@ import { ApiEndpointPresenter, HeaderPresenter, PayloadTemplatePresenter } from 
 
 export interface RunParams {
   endpoint: ApiEndpointPresenter;
-  headers: HeaderPresenter[];
+  headers?: HeaderPresenter[];
   payloadTemplate: PayloadTemplatePresenter;
   target: string;
 }

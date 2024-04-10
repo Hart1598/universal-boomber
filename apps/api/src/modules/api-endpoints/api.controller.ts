@@ -4,6 +4,7 @@ import { ApiEndpointPresenter, CreateEndpointDto, ListEndpointsDto } from "@app/
 import { ApiTags } from "@nestjs/swagger";
 import { RMQService } from "nestjs-rmq";
 import { ApiEndpointsCreateCommand, ApiEndpointsDeleteCommand, ApiEndpointsListQuery } from "@app/contracts";
+import { Pagination } from "@app/types";
 
 const MODULE_NAME = "api-endpoints";
 
@@ -14,7 +15,7 @@ export class ApiEndpointsApiController {
 
   @Route(MODULE_NAME, 'list')
   list(@Query() query: ListEndpointsDto): Promise<ApiEndpointPresenter[]> {
-    return this.rmqService.send<ApiEndpointsListQuery.Request, ApiEndpointsListQuery.Response>(ApiEndpointsListQuery.topic, query)
+    return this.rmqService.send<ApiEndpointsListQuery.Request, ApiEndpointsListQuery.Response>(ApiEndpointsListQuery.topic, query as Pagination)
   }
 
   @Route(MODULE_NAME, 'create')
