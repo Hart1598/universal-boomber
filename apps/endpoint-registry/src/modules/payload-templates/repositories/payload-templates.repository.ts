@@ -43,11 +43,15 @@ export class PayloadTemplatesRepository {
   }
 
   async find(params: FindParams): Promise<PayloadTemplate[]> {
-    const { pagination } = params;
+    const { pagination, endpointId } = params;
 
     const { limit, offset } = pagination || { limit: 10, offset: 0 };
 
-    const result = await this.db.query.payloadTemplates.findMany({ limit, offset });
+    const result = await this.db.query.payloadTemplates.findMany({
+      limit,
+      offset,
+      where: ((payloadTemplates, { eq }) => eq(payloadTemplates.endpointId, endpointId)),
+    })
 
     return result;
   }

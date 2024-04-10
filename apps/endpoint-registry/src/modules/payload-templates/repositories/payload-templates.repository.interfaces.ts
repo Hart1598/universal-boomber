@@ -5,6 +5,7 @@ export type InsertPayloadTemplate = typeof schema.payloadTemplates.$inferInsert;
 export type PayloadTemplate = typeof schema.payloadTemplates.$inferSelect;
 
 export interface FindParams {
+  endpointId: number;
   pagination?: Pagination;
 }
 

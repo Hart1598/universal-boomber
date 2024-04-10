@@ -8,5 +8,6 @@ export interface CreateParams {
 }
 
 export interface FindParams {
+  endpointId: number;
   pagination?: Pagination;
 }

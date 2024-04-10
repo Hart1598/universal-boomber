@@ -13,8 +13,11 @@ export class HeadersApiController {
   constructor(private readonly rmqService: RMQService) { }
 
   @Route(MODULE_NAME, 'list')
-  list(@Query() query: ListHeadersDto): Promise<HeaderPresenter[]> {
-    return this.rmqService.send<HeaderQueryCommand.Request, HeaderQueryCommand.Response>(HeaderQueryCommand.topic, query)
+  list(@Query() query: ListHeadersDto, @Param('id') id: number): Promise<HeaderPresenter[]> {
+    const offset = query.skip
+    const limit = query.take
+
+    return this.rmqService.send<HeaderQueryCommand.Request, HeaderQueryCommand.Response>(HeaderQueryCommand.topic, { offset, limit, endpointId: id })
   }
 
   @Route(MODULE_NAME, 'create')

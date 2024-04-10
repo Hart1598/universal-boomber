@@ -13,8 +13,15 @@ export class PayloadTemplateApiController {
   constructor(private readonly rmqService: RMQService) { }
 
   @Route(MODULE_NAME, 'list')
-  list(@Query() query: ListPayloadTemplateDto): Promise<PayloadTemplatePresenter[]> {
-    return this.rmqService.send<PayloadTemplateQueryCommand.Request, PayloadTemplateQueryCommand.Response>(PayloadTemplateQueryCommand.topic, query)
+  list(@Query() query: ListPayloadTemplateDto, @Param('id') id: number): Promise<PayloadTemplatePresenter[]> {
+    const offset = query.skip
+    const limit = query.take
+
+    return this.rmqService.send<PayloadTemplateQueryCommand.Request, PayloadTemplateQueryCommand.Response>(PayloadTemplateQueryCommand.topic, {
+      offset,
+      limit,
+      endpointId: id,
+    })
   }
 
   @Route(MODULE_NAME, 'create')

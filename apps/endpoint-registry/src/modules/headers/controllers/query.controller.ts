@@ -11,9 +11,9 @@ export class HeadersQueryController {
 
   @RMQRoute(HeaderQueryCommand.topic)
   async list(payload: HeaderQueryCommand.Request): Promise<HeaderQueryCommand.Response> {
-    const { take, skip } = payload;
+    const { offset, limit, endpointId } = payload;
 
-    const items = await this.headersService.find({ pagination: { limit: take, offset: skip } });
+    const items = await this.headersService.find({ pagination: { limit, offset }, endpointId });
 
     return items;
   }

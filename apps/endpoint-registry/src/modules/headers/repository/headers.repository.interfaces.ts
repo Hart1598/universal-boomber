@@ -6,6 +6,7 @@ export type InsertHeader = typeof schema.headers.$inferInsert;
 export type Header = typeof schema.headers.$inferSelect;
 
 export interface FindParams {
+  endpointId: number;
   pagination?: Pagination;
 }
 

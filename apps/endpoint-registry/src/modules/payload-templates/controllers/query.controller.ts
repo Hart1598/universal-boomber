@@ -11,9 +11,9 @@ export class PayloadTemplatesQueryController {
 
   @RMQRoute(PayloadTemplateQueryCommand.topic)
   async list(payload: PayloadTemplateQueryCommand.Request): Promise<PayloadTemplateQueryCommand.Response> {
-    const { take, skip } = payload;
+    const { limit, offset, endpointId } = payload;
 
-    const items = await this.payloadTemplatesService.find({ pagination: { limit: take, offset: skip } });
+    const items = await this.payloadTemplatesService.find({ pagination: { limit, offset }, endpointId });
 
     return items;
   }
